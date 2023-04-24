@@ -26,6 +26,16 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.set(0, 0, 10);
 scene.add(camera);
 
+// 初始化渲染器
+const renderer = new THREE.WebGLRenderer();
+// 设置渲染的尺寸大小
+renderer.setSize(window.innerWidth, window.innerHeight);
+// 将webgl渲染的canvas内容添加到body
+document.body.appendChild(renderer.domElement);
+
+// 使用渲染器，通过相机将场景渲染进来
+renderer.render(scene, camera);
+
 // 添加物体
 // 创建几何体
 const cubeGeometry = new THREE.BoxGeometry(1, 1, 1); // 长 宽 高
@@ -48,16 +58,7 @@ cube.rotation.set(Math.PI / 4, 0, 0, "XZY");
 // 将几何体添加到场景中
 scene.add(cube);
 
-// 初始化渲染器
-const renderer = new THREE.WebGLRenderer();
-// 设置渲染的尺寸大小
-renderer.setSize(window.innerWidth, window.innerHeight);
-// console.log(renderer);
-// 将webgl渲染的canvas内容添加到body
-document.body.appendChild(renderer.domElement);
 
-// 使用渲染器，通过相机将场景渲染进来
-renderer.render(scene, camera);
 
 // 创建轨道控制器
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -68,14 +69,12 @@ scene.add(axesHelper);
 // 设置时钟
 const clock = new THREE.Clock();
 function render() {
-  // console.log(time)
-  // 获取时钟运行的总时长
+  // // console.log(time)
+  // // 获取时钟运行的总时长
   let time = clock.getElapsedTime();
-  // console.log("时钟运行总时长：", time);
-  // let deltaTime = clock.getDelta();
-  // console.log("两次获取时间的间隔时间：", deltaTime);
-  // 请求动画帧  时间参数 控制物体动画
-  // let t = (time / 1000) % 5;
+  // // let deltaTime = clock.getDelta();
+  // // 请求动画帧  时间参数 控制物体动画
+  // // let t = (time / 1000) % 5;
   let t = time % 5;
   cube.position.x = t * 1;
 
